@@ -1,3 +1,3 @@
 # Tic-Tac-Toe
 
-using Python and Tkinter GUI tool kit
+A tic-tac-toe game built using Python and Tkinter GUI tool kit
