@@ -109,7 +109,7 @@ class TicTacToeBoard(tk.Tk):
             master=display_frame,
             text="Ready?",
             font=font.Font(size=28, weight="bold"),
-            fg='magenta'
+            fg='coral'
         )
         self.display.pack()
     
@@ -166,7 +166,7 @@ class TicTacToeBoard(tk.Tk):
         button_click.config(text=self._game.current_player.label)
         button_click.config(fg=self._game.current_player.color)
 
-    def _update_display(self, msg, color='magenta'):
+    def _update_display(self, msg, color='coral'):
         self.display['text'] = msg
         self.display['fg'] = color
 
@@ -192,7 +192,7 @@ class TicTacToeBoard(tk.Tk):
         self._game.reset_game()
         self._update_display(msg="Ready?")
         for button in self._cells.keys():
-            button.config(highlightbackground="magenta")
+            button.config(highlightbackground="coral")
             button.config(text="")
             button.config(fg="black")
 
