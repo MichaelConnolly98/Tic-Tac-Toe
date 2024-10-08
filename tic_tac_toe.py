@@ -108,7 +108,8 @@ class TicTacToeBoard(tk.Tk):
         self.display = tk.Label(
             master=display_frame,
             text="Ready?",
-            font=font.Font(size=28, weight="bold")
+            font=font.Font(size=28, weight="bold"),
+            fg='magenta'
         )
         self.display.pack()
     
@@ -123,10 +124,10 @@ class TicTacToeBoard(tk.Tk):
                     master=grid_frame,
                     text="",
                     font=font.Font(size=36, weight="bold"),
-                    fg="black",
+                    fg="magenta",
                     width=3,
                     height=2,
-                    highlightbackground="lightblue"
+                    highlightbackground="coral"
                 )
                 self._cells[button] = (row, col)
                 button.bind("<ButtonPress-1>", self.play)
@@ -148,6 +149,8 @@ class TicTacToeBoard(tk.Tk):
             self._game.process_move(move)
             if self._game.is_tied():
                 self._update_display(msg="Tied game!", color="red")
+                for button in self._cells.keys():
+                    button.config(highlightbackground='red')
             elif self._game.has_winner():
                 self._highlight_cells()
                 msg = f"Player {self._game.current_player.label} won!"
@@ -156,20 +159,21 @@ class TicTacToeBoard(tk.Tk):
             else:
                 self._game.toggle_player()
                 msg = f"{self._game.current_player.label}'s turn"
-                self._update_display(msg)
+                color = self._game.current_player.color
+                self._update_display(msg, color)
 
     def _update_button(self, button_click):
         button_click.config(text=self._game.current_player.label)
         button_click.config(fg=self._game.current_player.color)
 
-    def _update_display(self, msg, color='black'):
+    def _update_display(self, msg, color='magenta'):
         self.display['text'] = msg
         self.display['fg'] = color
 
     def _highlight_cells(self):
         for button, coordinates in self._cells.items():
             if coordinates in self._game.winner_combo:
-                button.config(highlightbackground='red')
+                button.config(highlightbackground=self._game.current_player.color)
 
     def _create_menu(self):
         menu_bar = tk.Menu(master=self)
@@ -188,7 +192,7 @@ class TicTacToeBoard(tk.Tk):
         self._game.reset_game()
         self._update_display(msg="Ready?")
         for button in self._cells.keys():
-            button.config(highlightbackground="lightblue")
+            button.config(highlightbackground="magenta")
             button.config(text="")
             button.config(fg="black")
 
