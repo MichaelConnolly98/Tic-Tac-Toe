@@ -124,7 +124,7 @@ class TicTacToeBoard(tk.Tk):
                     master=grid_frame,
                     text="",
                     font=font.Font(size=36, weight="bold"),
-                    fg="magenta",
+                    fg="black",
                     width=3,
                     height=2,
                     highlightbackground="coral"
